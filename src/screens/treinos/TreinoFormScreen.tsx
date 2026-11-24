@@ -7,8 +7,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { listarExercicios, listarGruposMusculares } from '../../api/catalogo'
 import { atualizarTreino, criarTreino, getTreino } from '../../api/treinos'
-import { ExercicioMidia } from '../../components/ExercicioMidia'
-import { miniaturaExercicio } from '../../components/treinos'
+import { ExercicioMidia, miniaturaExercicio } from '../../components/ExercicioMidia'
 import { Button, Chip, EmptyState, ErrorState, Loading, SectionHeader, TextField } from '../../components/ui'
 import { useTheme } from '../../context/ThemeContext'
 import { useDebounce } from '../../hooks/useDebounce'
@@ -297,6 +296,9 @@ function SeletorExercicios({
           <FlatList
             data={exercicios.data}
             keyExtractor={(e) => e.id}
+            initialNumToRender={8}
+            maxToRenderPerBatch={8}
+            windowSize={5}
             contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 140, gap: 10 }}
             ListEmptyComponent={<EmptyState icon={SearchX} title="Nada encontrado" message="Tente outro nome ou remova o filtro." />}
             renderItem={({ item }) => {

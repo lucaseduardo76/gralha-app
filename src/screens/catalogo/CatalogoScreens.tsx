@@ -5,7 +5,7 @@ import { Dumbbell, Pencil, Plus, Power, Search, SearchX, Trash2 } from 'lucide-r
 import { useState } from 'react'
 import { FlatList, Linking, Pressable, ScrollView, Switch, Text, View } from 'react-native'
 import { definirExercicioAtivo, excluirExercicio, getExercicio, listarExercicios, listarExerciciosAdmin, listarGruposMusculares } from '../../api/catalogo'
-import { ExercicioMidia, midiaExercicio, videoExterno } from '../../components/ExercicioMidia'
+import { ExercicioMidia, midiaExercicio, miniaturaExercicio, videoExterno } from '../../components/ExercicioMidia'
 import { ConfirmSheet } from '../../components/treinos'
 import { AppHeader, Button, Chip, EmptyState, ErrorState, Loading, Screen, TextField } from '../../components/ui'
 import { useAuth } from '../../context/AuthContext'
@@ -82,6 +82,9 @@ export function CatalogoScreen() {
         <FlatList
           data={exercicios.data}
           keyExtractor={(e) => e.id}
+          initialNumToRender={8}
+          maxToRenderPerBatch={8}
+          windowSize={5}
           contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 32, gap: 12 }}
           ListEmptyComponent={<EmptyState icon={SearchX} title="Nada encontrado" message="Tente outro nome ou remova os filtros." />}
           renderItem={({ item }) => <ExercicioCard exercicio={item} onPress={() => navigation.navigate('ExercicioDetalhe', { id: item.id, nome: item.nome })} />}
@@ -92,7 +95,7 @@ export function CatalogoScreen() {
 }
 
 function ExercicioCard({ exercicio, onPress }: { exercicio: Exercicio; onPress: () => void }) {
-  const midia = midiaExercicio(exercicio)
+  const midia = miniaturaExercicio(exercicio)
   return (
     <Pressable onPress={onPress} className={`flex-row items-center gap-4 overflow-hidden rounded-3xl bg-surface active:opacity-80 dark:bg-surface-dark ${exercicio.ativo === false ? 'opacity-60' : ''}`}>
       <ExercicioMidia uri={midia} tamanho={104} raio={0} iconeSize={30} />

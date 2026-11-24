@@ -5,8 +5,9 @@ import { colors } from '../lib/theme'
 
 /**
  * Mídia dos exercícios. O catálogo (ExerciseGymGifsDB) traz um GIF 360x360 em video_url_* e uma miniatura
- * 128x128 em thumbnail_url_* (mesmo caminho: "x.gif" / "x.thumb.webp"). A miniatura fica borrada esticada,
- * então o app usa sempre o GIF: animado no detalhe e na sessão, parado (primeiro quadro) nas listas.
+ * 128x128 em thumbnail_url_* (mesmo caminho: "x.gif" / "x.thumb.webp"). Listas usam a miniatura e só
+ * o detalhe e a sessão usam o GIF: mesmo parado (autoplay=false), o expo-image baixa e mantém o GIF inteiro no heap
+ * Java, e rolar o catálogo estourava a memória no Android (OutOfMemoryError).
  */
 type ComMidia = {
   video_url_male?: string | null
@@ -32,6 +33,11 @@ export function midiaExercicio(e: ComMidia): string | null {
   return gifDaMiniatura(e.thumbnail_url_female ?? e.thumbnail_url_male)
 }
 
+/** Imagem leve para listas: a miniatura; sem ela, o GIF. */
+export function miniaturaExercicio(e: ComMidia): string | null {
+  return e.thumbnail_url_female ?? e.thumbnail_url_male ?? midiaExercicio(e)
+}
+
 /** Vídeo externo (YouTube etc.) cadastrado pelo admin — esse sim abre fora do app. */
 export function videoExterno(e: ComMidia): string | null {
   const video = e.video_url_female ?? e.video_url_male
@@ -47,7 +53,7 @@ export function ExercicioMidia({
   iconeSize = 26,
 }: {
   uri: string | null | undefined
-  /** true: GIF em loop; false: só o primeiro quadro (listas). */
+  /** true: GIF em loop; false: parado (listas, com miniaturaExercicio). */
   animar?: boolean
   /** Quadrado de lado fixo; sem ele, ocupa a largura disponível (quadrado). */
   tamanho?: number
@@ -75,7 +81,7 @@ export function ExercicioMidia({
         style={{ width: '100%', height: '100%' }}
         contentFit="contain"
         autoplay={animar}
-        cachePolicy="memory-disk"
+        cachePolicy="disk"
         recyclingKey={uri}
         transition={150}
         accessibilityIgnoresInvertColors
