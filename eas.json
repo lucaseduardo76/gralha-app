@@ -1,0 +1,26 @@
+{
+  "cli": {
+    "version": ">= 16.0.0",
+    "appVersionSource": "local"
+  },
+  "build": {
+    "development": {
+      "developmentClient": false,
+      "distribution": "internal",
+      "android": { "buildType": "apk" },
+      "env": { "EXPO_PUBLIC_API_URL": "http://10.0.2.2:8080" }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": { "buildType": "apk" },
+      "env": { "EXPO_PUBLIC_API_URL": "https://valued-wed-ambien-images.trycloudflare.com" }
+    },
+    "production": {
+      "android": { "buildType": "app-bundle" },
+      "env": { "EXPO_PUBLIC_API_URL": "https://SUA-API-DE-PRODUCAO" }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

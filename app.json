@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "GralhaFit",
+    "slug": "gralha-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/brand/icon.png",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#181A20",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.gralhafit.app"
+    },
+    "android": {
+      "package": "com.gralhafit.app",
+      "versionCode": 1,
+      "predictiveBackGestureEnabled": false,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/brand/adaptive-icon.png",
+        "monochromeImage": "./assets/brand/adaptive-icon-monochrome.png",
+        "backgroundColor": "#7259F0"
+      }
+    },
+    "web": {
+      "favicon": "./assets/brand/favicon.png"
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/brand/splash-icon.png",
+          "imageWidth": 160,
+          "resizeMode": "contain",
+          "backgroundColor": "#181A20"
+        }
+      ],
+      "expo-status-bar",
+      "expo-image"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "9064a857-4183-453f-8f4f-4ce9d2ff78a1"
+      }
+    },
+    "owner": "lucas_eduardo57"
+  }
+}
