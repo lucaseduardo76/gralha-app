@@ -1,6 +1,6 @@
-import { Check, Dumbbell, Eye, EyeOff, type LucideIcon } from 'lucide-react-native'
+import { Check, Eye, EyeOff, type LucideIcon } from 'lucide-react-native'
 import { useState, type ReactNode } from 'react'
-import { ActivityIndicator, Pressable, Text, TextInput, View, type TextInputProps } from 'react-native'
+import { ActivityIndicator, Image, Pressable, Text, TextInput, View, type TextInputProps } from 'react-native'
 import { SafeAreaView, type Edge } from 'react-native-safe-area-context'
 import { useTheme } from '../../context/ThemeContext'
 import { colors } from '../../lib/theme'
@@ -16,12 +16,15 @@ export function Screen({ children, edges = ['top'] }: { children: ReactNode; edg
   )
 }
 
-/** Quadrado roxo com halter: a "marca" que abre o cabeçalho das telas principais. */
+/** Ícone do app (gralha branca no quadrado roxo): a marca que abre o cabeçalho das telas principais. */
 export function BrandMark({ size = 32 }: { size?: number }) {
   return (
-    <View style={{ width: size, height: size, borderRadius: size * 0.3 }} className="items-center justify-center bg-primary">
-      <Dumbbell size={size * 0.6} color="#fff" />
-    </View>
+    <Image
+      source={require('../../../assets/brand/icon.png')}
+      style={{ width: size, height: size, borderRadius: size * 0.3 }}
+      resizeMethod="resize"
+      accessible={false}
+    />
   )
 }
 
