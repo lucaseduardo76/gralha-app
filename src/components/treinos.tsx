@@ -3,16 +3,11 @@ import type { ReactNode } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import { diasSemanaTexto, resumoAlvos } from '../lib/format'
 import { colors } from '../lib/theme'
-import type { Exercicio, OrigemPlano } from '../types/domain'
+import type { OrigemPlano } from '../types/domain'
 import type { TreinoItem, TreinoResumo } from '../types/treinos'
-import { ExercicioMidia, midiaExercicio } from './ExercicioMidia'
+import { ExercicioMidia, miniaturaExercicio } from './ExercicioMidia'
 import { Button } from './ui'
 import { BottomSheet } from './ui/BottomSheet'
-
-/** Imagem do exercício para listas e detalhes (GIF do catálogo; ver ExercicioMidia). */
-export function miniaturaExercicio(e: Exercicio): string | null {
-  return midiaExercicio(e)
-}
 
 /** Selo "Manual" / "IA" dos cartões e do detalhe. */
 export function BadgeOrigem({ origem }: { origem: OrigemPlano }) {

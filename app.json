@@ -9,7 +9,12 @@
     "backgroundColor": "#181A20",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.gralhafit.app"
+      "bundleIdentifier": "com.gralhafit.app",
+      "icon": {
+        "light": "./assets/brand/icon.png",
+        "dark": "./assets/brand/ios/icon-dark.png",
+        "tinted": "./assets/brand/ios/icon-tinted.png"
+      }
     },
     "android": {
       "package": "com.gralhafit.app",
@@ -18,7 +23,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/brand/adaptive-icon.png",
         "monochromeImage": "./assets/brand/adaptive-icon-monochrome.png",
-        "backgroundColor": "#7259F0"
+        "backgroundColor": "#FCFCFC"
       }
     },
     "web": {
